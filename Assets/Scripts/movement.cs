@@ -8,13 +8,15 @@ public class movement : MonoBehaviour
     [SerializeField]
     private float movespeed = 3f;
     public GameObject particle;
+    public float trackarea;
+    public float distfrombul;
+    public Transform GOLI;
 
     [SerializeField]
     private float jetjumpforce = 3f;
 
-    [SerializeField]
-    private float rotationspeed = 3f;
-
+  
+    
     [SerializeField]
     private float boxHeight;
 
@@ -29,7 +31,7 @@ public class movement : MonoBehaviour
 
     private Collider2D[] isGrounded = new Collider2D[1];
 
-    private Rigidbody2D rigidbody;
+    private new Rigidbody2D rigidbody;
     private float moveinput;
     private bool isFlying = false;
    
@@ -38,13 +40,22 @@ public class movement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
-   
+    
     void Update()
     {
         moveinput = Input.GetAxis("Horizontal");
         isFlying = Input.GetKey(KeyCode.W);
+       /* float distfromplayer = Vector2.Distance(GOLI.position, transform.position);
+        if (distfromplayer < distfrombul)
+        {
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                Destroy(GOLI);
+            }
+               
+        }*/
     }
-
+    
     void FixedUpdate()
     {
         isGrounded[0] = null;
@@ -68,10 +79,16 @@ public class movement : MonoBehaviour
             rigidbody.AddForce(transform.rotation* Vector2.up * jetjumpforce);
         }
     }
+    
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(groundPosition.position,new Vector2 (boxLength,boxHeight));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, distfrombul);
     }
+    
+    
+    
 }
