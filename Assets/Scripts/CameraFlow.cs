@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CameraFlow : MonoBehaviour
 {
-    [SerializeField] private Transform target = null;
-    private Vector3 offset;         
-    void Start()
-    {
-        offset=transform.position-target.position;  
+    public GameObject Cam;
 
+    public Transform cameraPos;
+
+    private void Start()
+    {
+        
     }
 
-    // Update is called once per frame
-    private void LateUpdate()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.position=Vector3.Lerp(transform.position,new Vector3(target.position.x,0,0)+offset,Time.deltaTime*3);
+        Cam.transform.position = cameraPos.position;
     }
+
 }

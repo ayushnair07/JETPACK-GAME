@@ -13,7 +13,7 @@ public class movement : MonoBehaviour
     public Transform GOLI;
 
     [SerializeField]
-    private float jetjumpforce = 3f;
+    private float jetjumpforce = 2f;
 
   
     
@@ -73,7 +73,7 @@ public class movement : MonoBehaviour
         {
             particle.SetActive(true);
             GetComponentInChildren<ParticleSystem>().Play();
-            Vector3 rotation = new Vector3(0, 0,-moveinput);
+            Vector3 rotation = new Vector3(0, 0,-moveinput*3f);
             transform.Rotate(rotation);
             rigidbody.freezeRotation=true;
             rigidbody.AddForce(transform.rotation* Vector2.up * jetjumpforce);
